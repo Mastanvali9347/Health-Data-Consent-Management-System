@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import AdminDashboardView
+from django.shortcuts import render
 
 urlpatterns = [
-    path('dashboard/', AdminDashboardView.as_view()),
+    path('', lambda request: render(request, 'admin/dashboard.html')),
 ]

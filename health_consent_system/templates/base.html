@@ -13,8 +13,6 @@
 
     <input type="hidden" id="csrf-token" value="{{ csrf_token }}">
 
-    {% block body_content %}{% endblock %}
-
     <div id="preloader">
         <div class="loader-text">Health Consent System</div>
     </div>
@@ -28,12 +26,42 @@
             </div>
 
             <ul class="sidebar-menu">
-                <li><a href="#"><span class="material-icons">dashboard</span> Dashboard</a></li>
-                <li><a href="#"><span class="material-icons">folder_shared</span> Medical Records</a></li>
-                <li><a href="#"><span class="material-icons">verified_user</span> Consents</a></li>
-                <li><a href="#"><span class="material-icons">warning</span> Emergency</a></li>
-                <li><a href="#"><span class="material-icons">notifications</span> Notifications</a></li>
-                <li><a href="#"><span class="material-icons">settings</span> Settings</a></li>
+                <li>
+                    <a href="/records/dashboard/">
+                        <span class="material-icons">dashboard</span>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="/records/my/">
+                        <span class="material-icons">folder_shared</span>
+                        Medical Records
+                    </a>
+                </li>
+                <li>
+                    <a href="/consent/grant/">
+                        <span class="material-icons">verified_user</span>
+                        Consents
+                    </a>
+                </li>
+                <li>
+                    <a href="/emergency/">
+                        <span class="material-icons">warning</span>
+                        Emergency
+                    </a>
+                </li>
+                <li>
+                    <a href="/notifications/">
+                        <span class="material-icons">notifications</span>
+                        Notifications
+                    </a>
+                </li>
+                <li>
+                    <a href="/settings/">
+                        <span class="material-icons">settings</span>
+                        Settings
+                    </a>
+                </li>
             </ul>
         </aside>
 
@@ -53,15 +81,14 @@
                         <span class="material-icons">account_circle</span>
                         <span>{{ request.user.username }}</span>
                     </div>
-                    <a href="#" class="logout-btn">
+                    <a href="/auth/logout/" class="logout-btn">
                         <span class="material-icons">logout</span>
                     </a>
                 </div>
             </header>
 
             <main class="page-content">
-                {% block content %}
-                {% endblock %}
+                {% block content %}{% endblock %}
             </main>
 
             <footer class="footer">

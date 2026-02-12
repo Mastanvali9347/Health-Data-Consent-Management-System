@@ -16,25 +16,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
 from django.conf import settings
 from django.conf.urls.static import static
-from django.shortcuts import redirect
-
 
 urlpatterns = [
     path('', lambda request: redirect('/auth/login/')),
-
     path('admin/', admin.site.urls),
+
     path('auth/', include('accounts.urls')),
     path('records/', include('medical_records.urls')),
     path('consent/', include('consent_management.urls')),
-    path('logs/', include('access_logs.urls')),
     path('emergency/', include('emergency_access.urls')),
     path('notifications/', include('notifications.urls')),
-    path('system-admin/', include('admin_panel.urls')),
+    path('settings/', include('admin_panel.urls')),
+    path('logs/', include('access_logs.urls')),
 ]
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 

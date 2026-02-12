@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import MyNotificationsView
+from django.shortcuts import render
+from .views import NotificationListView
 
 urlpatterns = [
-    path('', MyNotificationsView.as_view()),
+    path('', lambda request: render(request, 'patient/notifications.html')),
+    path('api/', NotificationListView.as_view()),
 ]
