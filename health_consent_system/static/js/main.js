@@ -18,12 +18,14 @@ const toast = msg => {
 }
 
 const lockBtn = btn => {
+    if (!btn) return
     btn.disabled = true
     btn.dataset.txt = btn.innerText
     btn.innerText = "Please wait..."
 }
 
 const unlockBtn = btn => {
+    if (!btn) return
     btn.disabled = false
     btn.innerText = btn.dataset.txt
 }
@@ -71,38 +73,25 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.key === "Escape" && sidebar) sidebar.classList.remove("open")
     })
 
+    /* ---------- LOGIN (HTML SUBMIT ONLY) ---------- */
     const loginForm = qs("form[action='/auth/login/']")
     if (loginForm) {
-        loginForm.onsubmit = async e => {
-            e.preventDefault()
-            const btn = loginForm.querySelector("button")
-            lockBtn(btn)
-            const data = Object.fromEntries(new FormData(loginForm))
-            const res = await postJSON("/auth/login/", data)
-            unlockBtn(btn)
-            if (res.message) {
-                toast("Login successful")
-                setTimeout(() => location.href = "/records/dashboard/", 800)
-            } else toast("Invalid credentials")
+        loginForm.onsubmit = () => {
+            lockBtn(loginForm.querySelector("button"))
+            return true
         }
     }
 
+    /* ---------- REGISTER (HTML SUBMIT ONLY) ---------- */
     const registerForm = qs("form[action='/auth/register/']")
     if (registerForm) {
-        registerForm.onsubmit = async e => {
-            e.preventDefault()
-            const btn = registerForm.querySelector("button")
-            lockBtn(btn)
-            const data = Object.fromEntries(new FormData(registerForm))
-            const res = await postJSON("/auth/register/", data)
-            unlockBtn(btn)
-            if (res.message) {
-                toast("Registration successful")
-                setTimeout(() => location.href = "/auth/login/", 800)
-            } else toast("Registration failed")
+        registerForm.onsubmit = () => {
+            lockBtn(registerForm.querySelector("button"))
+            return true
         }
     }
 
+    /* ---------- UPLOAD MEDICAL RECORD ---------- */
     const uploadForm = qs("form[action='/records/api/upload/']")
     if (uploadForm) {
         uploadForm.onsubmit = async e => {
@@ -111,11 +100,11 @@ document.addEventListener("DOMContentLoaded", () => {
             lockBtn(btn)
             const res = await postForm("/records/api/upload/", new FormData(uploadForm))
             unlockBtn(btn)
-            if (res.message) toast("Medical record uploaded")
-            else toast("Upload failed")
+            res.message ? toast("Medical record uploaded") : toast("Upload failed")
         }
     }
 
+    /* ---------- GRANT CONSENT ---------- */
     const consentForm = qs("form[action='/consent/api/grant/']")
     if (consentForm) {
         consentForm.onsubmit = async e => {
@@ -125,22 +114,21 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = Object.fromEntries(new FormData(consentForm))
             const res = await postJSON("/consent/api/grant/", data)
             unlockBtn(btn)
-            if (res.message) toast("Consent granted")
-            else toast("Consent failed")
+            res.message ? toast("Consent granted") : toast("Consent failed")
         }
     }
 
+    /* ---------- DOCTOR ACCESS ---------- */
     qsa("[data-record-id]").forEach(btn => {
         btn.onclick = async () => {
-            const id = btn.dataset.recordId
             btn.classList.add("loading")
-            const res = await getJSON(`/records/doctor-access/${id}/`)
+            const res = await getJSON(`/records/doctor-access/${btn.dataset.recordId}/`)
             btn.classList.remove("loading")
-            if (res.message) toast("Access granted")
-            else toast("Access denied")
+            res.message ? toast("Access granted") : toast("Access denied")
         }
     })
 
+    /* ---------- EMERGENCY ACCESS ---------- */
     const emergencyForm = qs("form[action='/emergency/api/start/']")
     if (emergencyForm) {
         emergencyForm.onsubmit = async e => {
@@ -150,11 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = Object.fromEntries(new FormData(emergencyForm))
             const res = await postJSON("/emergency/api/start/", data)
             unlockBtn(btn)
-            if (res.message) toast("Emergency access activated")
-            else toast("Emergency failed")
+            res.message ? toast("Emergency access activated") : toast("Emergency failed")
         }
     }
 
+    /* ---------- NOTIFICATIONS ---------- */
     const notifyBox = qs(".notification-list")
     if (notifyBox) {
         getJSON("/notifications/").then(list => {
