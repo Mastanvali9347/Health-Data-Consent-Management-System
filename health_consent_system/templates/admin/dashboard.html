@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard | HealthCare+{% endblock %}
+{% block page_title %}System Admin Dashboard{% endblock %}
+
+{% block content %}
+<section class="admin-dashboard-wrapper">
+
+    <!-- ===== HERO SECTION ===== -->
+    <div class="dashboard-hero">
+        <h2>System Overview</h2>
+        <p>Monitor users, data access, and system activity</p>
+    </div>
+
+    <!-- ===== SYSTEM STATS ===== -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <span class="material-icons">people</span>
+            <div>
+                <h3>Total Users</h3>
+                <p>Registered accounts</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="material-icons">folder</span>
+            <div>
+                <h3>Medical Records</h3>
+                <p>Encrypted files stored</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="material-icons">verified_user</span>
+            <div>
+                <h3>Active Consents</h3>
+                <p>Patient-granted permissions</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="material-icons">history</span>
+            <div>
+                <h3>Audit Logs</h3>
+                <p>Recorded system actions</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== QUICK MANAGEMENT ===== -->
+    <div class="admin-actions">
+
+        <h3>Management</h3>
+
+        <div class="action-grid">
+
+            <a href="#" class="action-card">
+                <span class="material-icons">group</span>
+                <h4>Manage Users</h4>
+                <p>View, block or assign roles</p>
+            </a>
+
+            <a href="#" class="action-card">
+                <span class="material-icons">lock</span>
+                <h4>Consent Records</h4>
+                <p>Monitor consent history</p>
+            </a>
+
+            <a href="#" class="action-card">
+                <span class="material-icons">list_alt</span>
+                <h4>Access Logs</h4>
+                <p>Review audit activity</p>
+            </a>
+
+            <a href="#" class="action-card">
+                <span class="material-icons">settings</span>
+                <h4>System Settings</h4>
+                <p>Configure security policies</p>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- ===== SYSTEM ALERTS ===== -->
+    <div class="system-alerts">
+        <h3>Recent Alerts</h3>
+
+        <ul class="alert-list">
+            <li>
+                <span class="material-icons">warning</span>
+                Emergency access used by Doctor_201
+            </li>
+            <li>
+                <span class="material-icons">verified</span>
+                Consent granted by Patient_101
+            </li>
+            <li>
+                <span class="material-icons">security</span>
+                No suspicious activity detected
+            </li>
+        </ul>
+    </div>
+
+</section>
+{% endblock %}

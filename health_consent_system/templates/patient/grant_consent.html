@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Grant Consent{% endblock %}
+
+{% block content %}
+<section class="consent-wrapper">
+    <div class="consent-card">
+        <h2>Grant Medical Data Consent</h2>
+
+        <form method="post" action="/consent/api/grant/">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Doctor ID</label>
+                <input
+                    type="number"
+                    name="provider"
+                    placeholder="Enter Doctor User ID"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Record Type</label>
+                <select name="record_type" required>
+                    <option value="">Select Record Type</option>
+                    <option value="Blood Report">Blood Report</option>
+                    <option value="MRI">MRI</option>
+                    <option value="X-Ray">X-Ray</option>
+                    <option value="Prescription">Prescription</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Consent Valid Until</label>
+                <input
+                    type="datetime-local"
+                    name="end_date"
+                    required
+                >
+            </div>
+
+            <button type="submit">
+                Grant Consent
+            </button>
+        </form>
+
+        <p class="consent-note">
+            You can revoke this consent at any time.
+            All access is logged for security.
+        </p>
+    </div>
+</section>
+{% endblock %}

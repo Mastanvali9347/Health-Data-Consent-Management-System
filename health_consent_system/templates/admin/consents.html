@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Consent Records | HealthCare+{% endblock %}
+{% block page_title %}Consent Records{% endblock %}
+
+{% block content %}
+<section class="admin-consents-wrapper">
+
+    <div class="page-header">
+        <h2>Consent Management</h2>
+        <p>Track all patient consents</p>
+    </div>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Consent ID</th>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Record Type</th>
+                <th>Valid Until</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>patient_101</td>
+                <td>doctor_201</td>
+                <td>Blood Report</td>
+                <td>20 Feb 2026</td>
+                <td>Active</td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>
+{% endblock %}

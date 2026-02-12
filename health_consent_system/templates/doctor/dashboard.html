@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Doctor Dashboard | HealthCare+{% endblock %}
+{% block page_title %}Doctor Dashboard{% endblock %}
+
+{% block content %}
+<section class="dashboard-wrapper">
+
+    <!-- ===== HERO SECTION ===== -->
+    <div class="dashboard-hero">
+        <h2>Welcome, Dr. {{ request.user.username }}</h2>
+        <p>Access patient records securely with consent or emergency authorization</p>
+    </div>
+
+    <!-- ===== STATS SECTION ===== -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <span class="material-icons">people</span>
+            <div>
+                <h3>Patients</h3>
+                <p>Patients under your care</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="material-icons">verified_user</span>
+            <div>
+                <h3>Active Consents</h3>
+                <p>Patients who granted access</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="material-icons">warning</span>
+            <div>
+                <h3>Emergency Access</h3>
+                <p>Break-glass sessions</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== QUICK ACTIONS ===== -->
+    <div class="quick-actions">
+
+        <h3>Quick Actions</h3>
+
+        <div class="action-grid">
+
+            <a href="#" class="action-card">
+                <span class="material-icons">folder_shared</span>
+                <h4>View Patient Records</h4>
+                <p>Access records with valid consent</p>
+            </a>
+
+            <a href="#" class="action-card">
+                <span class="material-icons">warning_amber</span>
+                <h4>Emergency Access</h4>
+                <p>Request break-glass permission</p>
+            </a>
+
+            <a href="#" class="action-card">
+                <span class="material-icons">history</span>
+                <h4>Access History</h4>
+                <p>View your audit logs</p>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- ===== RECENT ACTIVITY ===== -->
+    <div class="recent-activity">
+
+        <h3>Recent Activity</h3>
+
+        <ul class="activity-list">
+            <li>
+                <span class="material-icons">visibility</span>
+                <div>
+                    <strong>Viewed patient record</strong>
+                    <p>Blood Report accessed</p>
+                </div>
+            </li>
+
+            <li>
+                <span class="material-icons">verified</span>
+                <div>
+                    <strong>Consent verified</strong>
+                    <p>Patient access approved</p>
+                </div>
+            </li>
+
+            <li>
+                <span class="material-icons">warning</span>
+                <div>
+                    <strong>Emergency access requested</strong>
+                    <p>Critical situation logged</p>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+</section>
+{% endblock %}

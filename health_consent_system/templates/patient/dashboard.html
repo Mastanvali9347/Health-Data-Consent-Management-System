@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Dashboard | HealthCare+{% endblock %}
+{% block page_title %}Patient Dashboard{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+
+<section class="dashboard-wrapper">
+
+    <div class="dashboard-hero">
+        <h2>Welcome, {{ request.user.username }}</h2>
+        <p>Manage your medical records and control data access securely</p>
+    </div>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-icons">folder</span>
+            </div>
+            <div class="stat-info">
+                <h3>My Records</h3>
+                <p>Total medical files uploaded</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-icons">verified_user</span>
+            </div>
+            <div class="stat-info">
+                <h3>Active Consents</h3>
+                <p>Doctors with access permission</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-icons">notifications</span>
+            </div>
+            <div class="stat-info">
+                <h3>Alerts</h3>
+                <p>Security & access notifications</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="quick-actions">
+        <h3>Quick Actions</h3>
+
+        <div class="action-grid">
+
+            <a href="/records/upload/" class="action-card">
+                <span class="material-icons">upload_file</span>
+                <h4>Upload Record</h4>
+                <p>Add a new medical document</p>
+            </a>
+
+            <a href="/records/my-records/" class="action-card">
+                <span class="material-icons">folder_open</span>
+                <h4>View Records</h4>
+                <p>Access your uploaded files</p>
+            </a>
+
+            <a href="/consent/grant/" class="action-card">
+                <span class="material-icons">lock_open</span>
+                <h4>Grant Consent</h4>
+                <p>Allow doctor access securely</p>
+            </a>
+
+            <a href="/logs/" class="action-card">
+                <span class="material-icons">history</span>
+                <h4>Access Logs</h4>
+                <p>View who accessed your data</p>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="recent-activity">
+        <h3>Recent Activity</h3>
+
+        <ul class="activity-list">
+            <li>
+                <span class="material-icons">upload</span>
+                <div>
+                    <strong>Medical record uploaded</strong>
+                    <p>Blood Report</p>
+                </div>
+            </li>
+
+            <li>
+                <span class="material-icons">verified</span>
+                <div>
+                    <strong>Consent granted</strong>
+                    <p>Doctor access approved</p>
+                </div>
+            </li>
+
+            <li>
+                <span class="material-icons">security</span>
+                <div>
+                    <strong>Security check</strong>
+                    <p>No unusual activity detected</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</section>
+
+{% else %}
+<p style="padding:40px">Not authenticated. <a href="/auth/login/">Login</a></p>
+{% endif %}
+{% endblock %}

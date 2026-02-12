@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Emergency Access{% endblock %}
+
+{% block content %}
+<section class="emergency-wrapper">
+
+    <h2>Emergency Access</h2>
+    <p>
+        This feature is for critical medical situations only.
+        All actions are logged and audited.
+    </p>
+
+    <form method="post" action="/emergency/api/start/">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="patient">Patient ID</label>
+            <input
+                type="number"
+                id="patient"
+                name="patient"
+                placeholder="Enter patient ID"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="reason">Emergency Reason</label>
+            <textarea
+                id="reason"
+                name="reason"
+                placeholder="Describe the emergency condition"
+                required
+            ></textarea>
+        </div>
+
+        <button type="submit">
+            Start Emergency Access
+        </button>
+    </form>
+
+</section>
+{% endblock %}

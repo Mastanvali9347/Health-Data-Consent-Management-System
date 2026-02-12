@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Records | HealthCare+{% endblock %}
+{% block page_title %}Patient Records{% endblock %}
+
+{% block content %}
+<section class="records-wrapper">
+
+    <!-- ===== PAGE HEADER ===== -->
+    <div class="page-header">
+        <h2>Patient Medical Records</h2>
+        <p>Access patient records only with valid consent or emergency authorization</p>
+    </div>
+
+    <!-- ===== PATIENT INFO CARD ===== -->
+    <div class="patient-info-card">
+        <h3>Patient Information</h3>
+        <div class="patient-info">
+            <p><strong>Name:</strong> Patient_101</p>
+            <p><strong>Patient ID:</strong> 101</p>
+            <p><strong>Consent Status:</strong> Active</p>
+        </div>
+    </div>
+
+    <!-- ===== RECORDS TABLE ===== -->
+    <div class="records-table-wrapper">
+
+        <table class="records-table">
+            <thead>
+                <tr>
+                    <th>Record Type</th>
+                    <th>Uploaded Date</th>
+                    <th>Access</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>Blood Report</td>
+                    <td>10 Feb 2026</td>
+                    <td>
+                        <a href="#" class="btn-secondary">
+                            View Record
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>MRI Scan</td>
+                    <td>05 Feb 2026</td>
+                    <td>
+                        <a href="#" class="btn-secondary">
+                            View Record
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Prescription</td>
+                    <td>01 Feb 2026</td>
+                    <td>
+                        <a href="#" class="btn-secondary">
+                            View Record
+                        </a>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- ===== ACCESS NOTICE ===== -->
+    <div class="access-notice">
+        <span class="material-icons">security</span>
+        <p>
+            All record access is logged for audit and compliance purposes.
+            Unauthorized access is strictly prohibited.
+        </p>
+    </div>
+
+    <!-- ===== EMERGENCY ACCESS ===== -->
+    <div class="emergency-access-card">
+        <h3>Emergency Access</h3>
+        <p>Use only in critical situations when patient consent is unavailable</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Emergency Reason</label>
+                <textarea name="reason" placeholder="Describe the emergency condition" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-danger">
+                Request Emergency Access
+            </button>
+        </form>
+    </div>
+
+</section>
+{% endblock %}
+

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Audit Logs | HealthCare+{% endblock %}
+{% block page_title %}Audit Logs{% endblock %}
+
+{% block content %}
+<section class="admin-logs-wrapper">
+
+    <div class="page-header">
+        <h2>Audit Logs</h2>
+        <p>Complete access and activity history</p>
+    </div>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Log ID</th>
+                <th>User</th>
+                <th>Action</th>
+                <th>Record ID</th>
+                <th>Date & Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>doctor_201</td>
+                <td>DOCTOR_VIEW_RECORD</td>
+                <td>1</td>
+                <td>10 Feb 2026 21:10</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>patient_101</td>
+                <td>UPLOAD_RECORD</td>
+                <td>1</td>
+                <td>10 Feb 2026 20:45</td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>
+{% endblock %}

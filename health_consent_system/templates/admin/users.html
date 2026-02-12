@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Users | HealthCare+{% endblock %}
+{% block page_title %}Manage Users{% endblock %}
+
+{% block content %}
+<section class="admin-users-wrapper">
+
+    <div class="page-header">
+        <h2>User Management</h2>
+        <p>View and manage system users</p>
+    </div>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>patient_101</td>
+                <td>patient101@gmail.com</td>
+                <td>PATIENT</td>
+                <td>Active</td>
+                <td><a href="#">Block</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>doctor_201</td>
+                <td>doctor201@gmail.com</td>
+                <td>DOCTOR</td>
+                <td>Active</td>
+                <td><a href="#">Block</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>
+{% endblock %}

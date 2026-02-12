@@ -11,7 +11,8 @@ class User(AbstractUser):
     role = models.CharField(
         max_length=20,
         choices=ROLE_CHOICES,
-        default='ADMIN'   # ✅ REQUIRED FIX
+        default='ADMIN'
     )
+
     def __str__(self):
         return f"{self.username} ({self.get_role_display()})"

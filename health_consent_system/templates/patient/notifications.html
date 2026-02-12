@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Notifications | HealthCare+{% endblock %}
+{% block page_title %}Notifications{% endblock %}
+
+{% block content %}
+<section class="notifications-wrapper">
+
+    <!-- ===== PAGE HEADER ===== -->
+    <div class="page-header">
+        <h2>Notifications</h2>
+        <p>Stay informed about access and security events</p>
+    </div>
+
+    <!-- ===== NOTIFICATIONS LIST ===== -->
+    <div class="notification-list">
+
+        <div class="notification-card">
+            <span class="material-icons">verified</span>
+            <div class="notification-content">
+                <h4>Consent Granted</h4>
+                <p>You granted access to Doctor_201</p>
+                <small>10 Feb 2026 · 09:45 PM</small>
+            </div>
+        </div>
+
+        <div class="notification-card">
+            <span class="material-icons">visibility</span>
+            <div class="notification-content">
+                <h4>Record Accessed</h4>
+                <p>Your Blood Report was accessed by Doctor_201</p>
+                <small>10 Feb 2026 · 09:30 PM</small>
+            </div>
+        </div>
+
+        <div class="notification-card">
+            <span class="material-icons">warning</span>
+            <div class="notification-content">
+                <h4>Emergency Access</h4>
+                <p>Emergency access was used on your records</p>
+                <small>09 Feb 2026 · 11:10 PM</small>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Profile | HealthCare+{% endblock %}
+{% block page_title %}My Profile{% endblock %}
+
+{% block content %}
+<section class="profile-wrapper">
+
+    <div class="profile-card">
+        <h2>Account Details</h2>
+
+        <div class="profile-item">
+            <strong>Username:</strong>
+            <span>{{ request.user.username }}</span>
+        </div>
+
+        <div class="profile-item">
+            <strong>Email:</strong>
+            <span>{{ request.user.email }}</span>
+        </div>
+
+        <div class="profile-item">
+            <strong>Role:</strong>
+            <span>{{ request.user.role }}</span>
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}
