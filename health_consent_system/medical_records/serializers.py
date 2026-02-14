@@ -4,5 +4,5 @@ from .models import MedicalRecord
 class MedicalRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = MedicalRecord
-        fields = '__all__'
-        read_only_fields = ('patient',)
+        fields = "__all__"
+        read_only_fields = ("id", "patient", "created_at")

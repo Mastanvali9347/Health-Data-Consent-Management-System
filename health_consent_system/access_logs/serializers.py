@@ -4,4 +4,5 @@ from .models import AccessLog
 class AccessLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = AccessLog
-        fields = '__all__'
+        fields = "__all__"
+        read_only_fields = ("id", "created_at")

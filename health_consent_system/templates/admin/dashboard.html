@@ -9,7 +9,10 @@
     <!-- ===== HERO SECTION ===== -->
     <div class="dashboard-hero">
         <h2>System Overview</h2>
-        <p>Monitor users, data access, and system activity</p>
+        <p>
+            Centralized monitoring for users, medical data access,
+            consent enforcement, and compliance activity
+        </p>
     </div>
 
     <!-- ===== SYSTEM STATS ===== -->
@@ -19,7 +22,7 @@
             <span class="material-icons">people</span>
             <div>
                 <h3>Total Users</h3>
-                <p>Registered accounts</p>
+                <p>Patients, doctors, and administrators</p>
             </div>
         </div>
 
@@ -27,7 +30,7 @@
             <span class="material-icons">folder</span>
             <div>
                 <h3>Medical Records</h3>
-                <p>Encrypted files stored</p>
+                <p>Encrypted health files stored securely</p>
             </div>
         </div>
 
@@ -35,7 +38,7 @@
             <span class="material-icons">verified_user</span>
             <div>
                 <h3>Active Consents</h3>
-                <p>Patient-granted permissions</p>
+                <p>Valid patient permissions</p>
             </div>
         </div>
 
@@ -43,7 +46,23 @@
             <span class="material-icons">history</span>
             <div>
                 <h3>Audit Logs</h3>
-                <p>Recorded system actions</p>
+                <p>All system access events</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="material-icons">warning</span>
+            <div>
+                <h3>Emergency Access</h3>
+                <p>Break-glass events recorded</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="material-icons">notifications</span>
+            <div>
+                <h3>Notifications</h3>
+                <p>Security & consent alerts</p>
             </div>
         </div>
 
@@ -52,45 +71,81 @@
     <!-- ===== QUICK MANAGEMENT ===== -->
     <div class="admin-actions">
 
-        <h3>Management</h3>
+        <h3>Administrative Controls</h3>
 
         <div class="action-grid">
 
             <a href="#" class="action-card">
                 <span class="material-icons">group</span>
-                <h4>Manage Users</h4>
-                <p>View, block or assign roles</p>
+                <h4>User Management</h4>
+                <p>Create, suspend, or assign user roles</p>
             </a>
 
             <a href="#" class="action-card">
                 <span class="material-icons">lock</span>
-                <h4>Consent Records</h4>
-                <p>Monitor consent history</p>
+                <h4>Consent Oversight</h4>
+                <p>Review and audit consent records</p>
             </a>
 
             <a href="#" class="action-card">
                 <span class="material-icons">list_alt</span>
-                <h4>Access Logs</h4>
-                <p>Review audit activity</p>
+                <h4>Audit & Access Logs</h4>
+                <p>Monitor who accessed patient data</p>
+            </a>
+
+            <a href="#" class="action-card">
+                <span class="material-icons">warning_amber</span>
+                <h4>Emergency Reviews</h4>
+                <p>Investigate emergency access usage</p>
+            </a>
+
+            <a href="#" class="action-card">
+                <span class="material-icons">security</span>
+                <h4>Security Policies</h4>
+                <p>Password rules & access restrictions</p>
             </a>
 
             <a href="#" class="action-card">
                 <span class="material-icons">settings</span>
-                <h4>System Settings</h4>
-                <p>Configure security policies</p>
+                <h4>System Configuration</h4>
+                <p>Database, encryption & alerts</p>
             </a>
 
         </div>
     </div>
 
+    <!-- ===== COMPLIANCE STATUS ===== -->
+    <div class="compliance-section">
+        <h3>Compliance Status</h3>
+
+        <ul class="compliance-list">
+            <li>
+                <span class="material-icons">check_circle</span>
+                Consent-based access enforced
+            </li>
+            <li>
+                <span class="material-icons">check_circle</span>
+                All medical files encrypted
+            </li>
+            <li>
+                <span class="material-icons">check_circle</span>
+                Audit logging enabled
+            </li>
+            <li>
+                <span class="material-icons">check_circle</span>
+                Emergency access monitored
+            </li>
+        </ul>
+    </div>
+
     <!-- ===== SYSTEM ALERTS ===== -->
     <div class="system-alerts">
-        <h3>Recent Alerts</h3>
+        <h3>Recent System Alerts</h3>
 
         <ul class="alert-list">
             <li>
                 <span class="material-icons">warning</span>
-                Emergency access used by Doctor_201
+                Emergency access used by Doctor_201 (under review)
             </li>
             <li>
                 <span class="material-icons">verified</span>
@@ -99,6 +154,10 @@
             <li>
                 <span class="material-icons">security</span>
                 No suspicious activity detected
+            </li>
+            <li>
+                <span class="material-icons">info</span>
+                Daily database backup completed successfully
             </li>
         </ul>
     </div>

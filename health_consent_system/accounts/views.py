@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -10,46 +11,39 @@ from .serializers import RegisterSerializer, LoginSerializer
 
 User = get_user_model()
 
+
 def login_page(request):
-    if request.method == 'POST':
-        username = request.POST.get('username', '').strip()
-        password = request.POST.get('password', '').strip()
+    if request.method == "POST":
+        username = request.POST.get("username", "").strip()
+        password = request.POST.get("password", "").strip()
 
         user = authenticate(request, username=username, password=password)
-
-        if user is not None:
+        if user:
             login(request, user)
-            return redirect('/records/dashboard/')
+            return redirect("/records/dashboard/")
 
-        return render(request, 'auth/login.html', {
-            'error': 'Invalid username or password'
-        })
+        return render(request, "auth/login.html", {"error": "Invalid credentials"})
 
-    return render(request, 'auth/login.html')
+    return render(request, "auth/login.html")
+
 
 def register_page(request):
-    if request.method == 'POST':
-        username = request.POST.get('username', '').strip()
-        email = request.POST.get('email', '').strip()
-        password = request.POST.get('password', '').strip()
-        role = request.POST.get('role', '').strip()
+    if request.method == "POST":
+        data = {
+            "username": request.POST.get("username", "").strip(),
+            "email": request.POST.get("email", "").strip(),
+            "password": request.POST.get("password", "").strip(),
+            "role": request.POST.get("role", "").strip(),
+        }
 
-        if not username or not password or not role:
-            return render(request, 'auth/register.html', {
-                'error': 'All fields are required'
-            })
+        serializer = RegisterSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return redirect("/auth/login/")
 
-        User.objects.create_user(
-            username=username,
-            email=email,
-            password=password,
-            role=role
-        )
+        return render(request, "auth/register.html", {"error": "Invalid input"})
 
-        return redirect('/auth/login/')
-
-    return render(request, 'auth/register.html')
-
+    return render(request, "auth/register.html")
 
 
 class LoginAPIView(APIView):
@@ -77,9 +71,8 @@ class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        u = request.user
         return Response({
-            "username": u.username,
-            "email": u.email,
-            "role": u.role
+            "username": request.user.username,
+            "email": request.user.email,
+            "role": request.user.role
         })

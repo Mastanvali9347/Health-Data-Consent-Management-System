@@ -1,54 +1,51 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from django.utils import timezone
 
 from .models import Consent
 from .serializers import ConsentSerializer
-from access_logs.models import AccessLog
 from notifications.services import create_notification
 
 
-@login_required
+@login_required(login_url="/auth/login/")
 def grant_consent_page(request):
-    return render(request, 'patient/grant_consent.html')
+    return render(request, "patient/grant_consent.html")
 
 
-@login_required
+@login_required(login_url="/auth/login/")
 def my_consents_page(request):
     consents = Consent.objects.filter(patient=request.user)
-    return render(request, 'patient/consents.html', {'consents': consents})
+    return render(request, "patient/consents.html", {"consents": consents})
+
 
 class GrantConsentView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        if request.user.role != 'PATIENT':
+        if request.user.role != "PATIENT":
             return Response({"error": "Only patients can grant consent"}, status=403)
 
-        doctor_id = request.data.get('provider')
-        record_type = request.data.get('record_type')
-        end_date = request.data.get('end_date')
+        serializer = ConsentSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
-        if not doctor_id or not record_type or not end_date:
-            return Response({"error": "All fields required"}, status=400)
-
-        consent = Consent.objects.create(
+        serializer.save(
             patient=request.user,
-            provider_id=doctor_id,
-            record_type=record_type,
-            end_date=end_date
+            is_active=True
         )
 
-        AccessLog.objects.create(
+        create_notification(
             user=request.user,
-            record=None,
-            action='GRANT_CONSENT'
+            message="You granted medical data consent"
         )
 
-        return Response({"message": "Consent granted successfully"}, status=201)
+        return Response(
+            {"message": "Consent granted successfully"},
+            status=201
+        )
 
 
 class RevokeConsentView(APIView):
@@ -66,15 +63,9 @@ class RevokeConsentView(APIView):
         consent.end_date = timezone.now()
         consent.save()
 
-        AccessLog.objects.create(
-            user=request.user,
-            record_id=0,
-            action="REVOKE_CONSENT"
-        )
-
         create_notification(
             user=request.user,
-            message="You revoked a consent"
+            message="You revoked a medical data consent"
         )
 
         return Response({"message": "Consent revoked successfully"})

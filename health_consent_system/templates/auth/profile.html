@@ -1,29 +1,43 @@
 {% extends "base.html" %}
 
-{% block title %}Profile | HealthCare+{% endblock %}
+{% block title %}My Profile | HealthCare+{% endblock %}
 {% block page_title %}My Profile{% endblock %}
 
 {% block content %}
 <section class="profile-wrapper">
 
+    <!-- ===== PROFILE HEADER ===== -->
+    <div class="profile-header">
+        <h2>Account Information</h2>
+        <p>Review your personal and role details</p>
+    </div>
+
+    <!-- ===== PROFILE CARD ===== -->
     <div class="profile-card">
-        <h2>Account Details</h2>
 
         <div class="profile-item">
-            <strong>Username:</strong>
+            <strong>Username</strong>
             <span>{{ request.user.username }}</span>
         </div>
 
         <div class="profile-item">
-            <strong>Email:</strong>
+            <strong>Email Address</strong>
             <span>{{ request.user.email }}</span>
         </div>
 
         <div class="profile-item">
-            <strong>Role:</strong>
+            <strong>User Role</strong>
             <span>{{ request.user.role }}</span>
         </div>
 
+    </div>
+
+    <!-- ===== SECURITY NOTICE ===== -->
+    <div class="profile-security-note">
+        <p>
+            Your account information is protected under system security policies.
+            Any changes to roles or permissions must be approved by an administrator.
+        </p>
     </div>
 
 </section>

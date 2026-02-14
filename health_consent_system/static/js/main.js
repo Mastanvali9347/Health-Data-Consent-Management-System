@@ -13,25 +13,25 @@ const toast = msg => {
     requestAnimationFrame(() => t.classList.add("show"))
     setTimeout(() => {
         t.classList.remove("show")
-        setTimeout(() => t.remove(), 300)
-    }, 3000)
+        setTimeout(() => t.remove(), 400)
+    }, 3200)
 }
 
 const lockBtn = btn => {
     if (!btn) return
     btn.disabled = true
-    btn.dataset.txt = btn.innerText
-    btn.innerText = "Please wait..."
+    btn.dataset.text = btn.innerText
+    btn.innerText = "Processing..."
 }
 
 const unlockBtn = btn => {
     if (!btn) return
     btn.disabled = false
-    btn.innerText = btn.dataset.txt
+    btn.innerText = btn.dataset.text || "Submit"
 }
 
 const postJSON = async (url, data) => {
-    const r = await fetch(API_BASE + url, {
+    const res = await fetch(API_BASE + url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -40,22 +40,22 @@ const postJSON = async (url, data) => {
         credentials: "include",
         body: JSON.stringify(data)
     })
-    return r.json()
+    return res.json()
 }
 
 const postForm = async (url, data) => {
-    const r = await fetch(API_BASE + url, {
+    const res = await fetch(API_BASE + url, {
         method: "POST",
         headers: { "X-CSRFToken": csrftoken },
         credentials: "include",
         body: data
     })
-    return r.json()
+    return res.json()
 }
 
 const getJSON = async url => {
-    const r = await fetch(API_BASE + url, { credentials: "include" })
-    return r.json()
+    const res = await fetch(API_BASE + url, { credentials: "include" })
+    return res.json()
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -65,15 +65,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const toggle = qs(".menu-toggle")
     const sidebar = qs(".sidebar")
-    if (toggle && sidebar) {
-        toggle.onclick = () => sidebar.classList.toggle("open")
+    const overlay = qs(".sidebar-overlay")
+
+    if (toggle && sidebar && overlay) {
+        toggle.onclick = () => {
+            sidebar.classList.toggle("active")
+            overlay.classList.toggle("active")
+            document.body.style.overflow = sidebar.classList.contains("active") ? "hidden" : ""
+        }
+
+        overlay.onclick = () => {
+            sidebar.classList.remove("active")
+            overlay.classList.remove("active")
+            document.body.style.overflow = ""
+        }
     }
 
     document.addEventListener("keydown", e => {
-        if (e.key === "Escape" && sidebar) sidebar.classList.remove("open")
+        if (e.key === "Escape") {
+            sidebar?.classList.remove("active")
+            overlay?.classList.remove("active")
+            document.body.style.overflow = ""
+        }
     })
 
-    /* ---------- LOGIN (HTML SUBMIT ONLY) ---------- */
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 1024) {
+            sidebar?.classList.remove("active")
+            overlay?.classList.remove("active")
+            document.body.style.overflow = ""
+        }
+    })
+
     const loginForm = qs("form[action='/auth/login/']")
     if (loginForm) {
         loginForm.onsubmit = () => {
@@ -82,7 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    /* ---------- REGISTER (HTML SUBMIT ONLY) ---------- */
     const registerForm = qs("form[action='/auth/register/']")
     if (registerForm) {
         registerForm.onsubmit = () => {
@@ -91,69 +113,87 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    /* ---------- UPLOAD MEDICAL RECORD ---------- */
     const uploadForm = qs("form[action='/records/api/upload/']")
     if (uploadForm) {
         uploadForm.onsubmit = async e => {
             e.preventDefault()
             const btn = uploadForm.querySelector("button")
             lockBtn(btn)
-            const res = await postForm("/records/api/upload/", new FormData(uploadForm))
+            try {
+                const res = await postForm("/records/api/upload/", new FormData(uploadForm))
+                res?.message ? toast("Medical record uploaded successfully") : toast("Upload failed")
+            } catch {
+                toast("Network error")
+            }
             unlockBtn(btn)
-            res.message ? toast("Medical record uploaded") : toast("Upload failed")
         }
     }
 
-    /* ---------- GRANT CONSENT ---------- */
     const consentForm = qs("form[action='/consent/api/grant/']")
     if (consentForm) {
         consentForm.onsubmit = async e => {
             e.preventDefault()
             const btn = consentForm.querySelector("button")
             lockBtn(btn)
-            const data = Object.fromEntries(new FormData(consentForm))
-            const res = await postJSON("/consent/api/grant/", data)
+            try {
+                const data = Object.fromEntries(new FormData(consentForm))
+                const res = await postJSON("/consent/api/grant/", data)
+                res?.message ? toast("Consent granted successfully") : toast("Consent failed")
+            } catch {
+                toast("Network error")
+            }
             unlockBtn(btn)
-            res.message ? toast("Consent granted") : toast("Consent failed")
         }
     }
 
-    /* ---------- DOCTOR ACCESS ---------- */
     qsa("[data-record-id]").forEach(btn => {
         btn.onclick = async () => {
             btn.classList.add("loading")
-            const res = await getJSON(`/records/doctor-access/${btn.dataset.recordId}/`)
+            try {
+                const res = await getJSON(`/records/doctor-access/${btn.dataset.recordId}/`)
+                res?.message ? toast("Access granted") : toast("Access denied")
+            } catch {
+                toast("Access error")
+            }
             btn.classList.remove("loading")
-            res.message ? toast("Access granted") : toast("Access denied")
         }
     })
 
-    /* ---------- EMERGENCY ACCESS ---------- */
     const emergencyForm = qs("form[action='/emergency/api/start/']")
     if (emergencyForm) {
         emergencyForm.onsubmit = async e => {
             e.preventDefault()
             const btn = emergencyForm.querySelector("button")
             lockBtn(btn)
-            const data = Object.fromEntries(new FormData(emergencyForm))
-            const res = await postJSON("/emergency/api/start/", data)
+            try {
+                const data = Object.fromEntries(new FormData(emergencyForm))
+                const res = await postJSON("/emergency/api/start/", data)
+                res?.message ? toast("Emergency access activated") : toast("Emergency request failed")
+            } catch {
+                toast("Network error")
+            }
             unlockBtn(btn)
-            res.message ? toast("Emergency access activated") : toast("Emergency failed")
         }
     }
 
-    /* ---------- NOTIFICATIONS ---------- */
     const notifyBox = qs(".notification-list")
     if (notifyBox) {
-        getJSON("/notifications/").then(list => {
-            notifyBox.innerHTML = ""
-            list.forEach(n => {
-                const d = document.createElement("div")
-                d.className = "notification-card"
-                d.innerHTML = `<strong>${n.message}</strong><span>${new Date(n.created_at).toLocaleString()}</span>`
-                notifyBox.appendChild(d)
+        getJSON("/notifications/")
+            .then(list => {
+                notifyBox.innerHTML = ""
+                list.forEach(n => {
+                    const d = document.createElement("div")
+                    d.className = "notification-card"
+                    d.innerHTML = `
+                        <div class="notification-content">
+                            <strong>${n.message}</strong>
+                            <small>${new Date(n.created_at).toLocaleString()}</small>
+                        </div>
+                    `
+                    notifyBox.appendChild(d)
+                })
             })
-        })
+            .catch(() => toast("Failed to load notifications"))
     }
 
 })

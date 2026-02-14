@@ -9,7 +9,10 @@
     <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
         <h2>Patient Medical Records</h2>
-        <p>Access patient records only with valid consent or emergency authorization</p>
+        <p>
+            Access to patient data is governed by consent policies
+            and emergency authorization rules
+        </p>
     </div>
 
     <!-- ===== PATIENT INFO CARD ===== -->
@@ -19,6 +22,7 @@
             <p><strong>Name:</strong> Patient_101</p>
             <p><strong>Patient ID:</strong> 101</p>
             <p><strong>Consent Status:</strong> Active</p>
+            <p><strong>Last Accessed:</strong> 10 Feb 2026 · 09:30 PM</p>
         </div>
     </div>
 
@@ -30,6 +34,7 @@
                 <tr>
                     <th>Record Type</th>
                     <th>Uploaded Date</th>
+                    <th>Consent Scope</th>
                     <th>Access</th>
                 </tr>
             </thead>
@@ -38,6 +43,7 @@
                 <tr>
                     <td>Blood Report</td>
                     <td>10 Feb 2026</td>
+                    <td>Allowed</td>
                     <td>
                         <a href="#" class="btn-secondary">
                             View Record
@@ -48,6 +54,7 @@
                 <tr>
                     <td>MRI Scan</td>
                     <td>05 Feb 2026</td>
+                    <td>Allowed</td>
                     <td>
                         <a href="#" class="btn-secondary">
                             View Record
@@ -58,10 +65,9 @@
                 <tr>
                     <td>Prescription</td>
                     <td>01 Feb 2026</td>
+                    <td>Restricted</td>
                     <td>
-                        <a href="#" class="btn-secondary">
-                            View Record
-                        </a>
+                        <span>Consent Required</span>
                     </td>
                 </tr>
 
@@ -74,21 +80,28 @@
     <div class="access-notice">
         <span class="material-icons">security</span>
         <p>
-            All record access is logged for audit and compliance purposes.
-            Unauthorized access is strictly prohibited.
+            Every record access is logged with timestamp, user identity,
+            and reason for access to meet healthcare compliance standards.
         </p>
     </div>
 
     <!-- ===== EMERGENCY ACCESS ===== -->
     <div class="emergency-access-card">
-        <h3>Emergency Access</h3>
-        <p>Use only in critical situations when patient consent is unavailable</p>
+        <h3>Emergency (Break-Glass) Access</h3>
+        <p>
+            Use this option only when patient consent is unavailable
+            and immediate medical intervention is required.
+        </p>
 
         <form method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label>Emergency Reason</label>
-                <textarea name="reason" placeholder="Describe the emergency condition" required></textarea>
+                <label>Emergency Justification</label>
+                <textarea
+                    name="reason"
+                    placeholder="Clearly document the medical emergency"
+                    required
+                ></textarea>
             </div>
 
             <button type="submit" class="btn-danger">
@@ -97,6 +110,13 @@
         </form>
     </div>
 
+    <!-- ===== COMPLIANCE NOTE ===== -->
+    <div class="compliance-note">
+        <p>
+            Emergency access requests are reviewed by system administrators.
+            Improper usage may result in access revocation or disciplinary action.
+        </p>
+    </div>
+
 </section>
 {% endblock %}
-

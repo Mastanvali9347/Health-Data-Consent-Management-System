@@ -6,11 +6,23 @@
 {% block content %}
 <section class="admin-users-wrapper">
 
+    <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
         <h2>User Management</h2>
-        <p>View and manage system users</p>
+        <p>
+            View, control, and monitor all registered users across the system
+        </p>
     </div>
 
+    <!-- ===== USER SUMMARY ===== -->
+    <div class="user-summary">
+        <p>
+            Administrators can activate, block, or review user roles.
+            All changes are logged for audit and compliance purposes.
+        </p>
+    </div>
+
+    <!-- ===== USERS TABLE ===== -->
     <table class="admin-table">
         <thead>
             <tr>
@@ -19,28 +31,60 @@
                 <th>Email</th>
                 <th>Role</th>
                 <th>Status</th>
+                <th>Last Login</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
+
             <tr>
                 <td>1</td>
                 <td>patient_101</td>
                 <td>patient101@gmail.com</td>
                 <td>PATIENT</td>
                 <td>Active</td>
-                <td><a href="#">Block</a></td>
+                <td>10 Feb 2026 20:40</td>
+                <td>
+                    <a href="#">View</a> |
+                    <a href="#">Block</a>
+                </td>
             </tr>
+
             <tr>
                 <td>2</td>
                 <td>doctor_201</td>
                 <td>doctor201@gmail.com</td>
                 <td>DOCTOR</td>
                 <td>Active</td>
-                <td><a href="#">Block</a></td>
+                <td>10 Feb 2026 21:05</td>
+                <td>
+                    <a href="#">View</a> |
+                    <a href="#">Block</a>
+                </td>
             </tr>
+
+            <tr>
+                <td>3</td>
+                <td>admin_301</td>
+                <td>admin301@gmail.com</td>
+                <td>ADMIN</td>
+                <td>Active</td>
+                <td>10 Feb 2026 21:15</td>
+                <td>
+                    <a href="#">View</a>
+                </td>
+            </tr>
+
         </tbody>
     </table>
+
+    <!-- ===== SECURITY NOTE ===== -->
+    <div class="security-note">
+        <p>
+            Blocking a user immediately revokes system access.
+            Administrative actions are permanently recorded in audit logs.
+        </p>
+    </div>
 
 </section>
 {% endblock %}

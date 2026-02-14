@@ -2,15 +2,23 @@ from django.db import models
 from django.conf import settings
 
 class AccessLog(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="access_logs"
+    )
     record = models.ForeignKey(
-        'medical_records.MedicalRecord',
+        "medical_records.MedicalRecord",
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
+        related_name="access_logs"
     )
     action = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ["-created_at"]
+
     def __str__(self):
-        return f"{self.user} - {self.action}"
+        return f"{self.user} | {self.action} | {self.created_at}"

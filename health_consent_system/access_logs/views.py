@@ -9,17 +9,17 @@ from .models import AccessLog
 from .serializers import AccessLogSerializer
 
 
-@login_required(login_url='/auth/login/')
+@login_required(login_url="/auth/login/")
 def access_logs_page(request):
-    if request.user.role == 'ADMIN':
-        logs = AccessLog.objects.all().order_by('-created_at')
+    if request.user.role == "ADMIN":
+        logs = AccessLog.objects.all()
     else:
-        logs = AccessLog.objects.filter(user=request.user).order_by('-created_at')
+        logs = AccessLog.objects.filter(user=request.user)
 
     return render(
         request,
-        'admin/logs.html',
-        {'logs': logs}
+        "admin/logs.html",
+        {"logs": logs}
     )
 
 
@@ -27,10 +27,10 @@ class MyAccessLogsAPI(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        if request.user.role == 'ADMIN':
-            logs = AccessLog.objects.all().order_by('-created_at')
+        if request.user.role == "ADMIN":
+            logs = AccessLog.objects.all()
         else:
-            logs = AccessLog.objects.filter(user=request.user).order_by('-created_at')
+            logs = AccessLog.objects.filter(user=request.user)
 
         serializer = AccessLogSerializer(logs, many=True)
         return Response(serializer.data)

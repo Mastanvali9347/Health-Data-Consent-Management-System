@@ -1,44 +1,68 @@
 {% extends "base.html" %}
 
-{% block title %}Emergency Access{% endblock %}
+{% block title %}Emergency Access | HealthCare+{% endblock %}
+{% block page_title %}Emergency Access{% endblock %}
 
 {% block content %}
 <section class="emergency-wrapper">
 
-    <h2>Emergency Access</h2>
-    <p>
-        This feature is for critical medical situations only.
-        All actions are logged and audited.
-    </p>
+    <!-- ===== HEADER ===== -->
+    <div class="emergency-header">
+        <h2>Emergency Access (Break-Glass)</h2>
+        <p>
+            This feature is strictly intended for life-threatening or
+            critical medical situations where patient consent is unavailable.
+        </p>
+    </div>
 
-    <form method="post" action="/emergency/api/start/">
-        {% csrf_token %}
+    <!-- ===== WARNING NOTICE ===== -->
+    <div class="emergency-warning">
+        <p>
+            All emergency access actions are permanently logged,
+            monitored by system administrators, and subject to audit review.
+            Misuse may result in disciplinary action.
+        </p>
+    </div>
 
-        <div class="form-group">
-            <label for="patient">Patient ID</label>
-            <input
-                type="number"
-                id="patient"
-                name="patient"
-                placeholder="Enter patient ID"
-                required
-            >
-        </div>
+    <!-- ===== EMERGENCY FORM ===== -->
+    <div class="emergency-form-card">
+        <form method="post" action="/emergency/api/start/">
+            {% csrf_token %}
 
-        <div class="form-group">
-            <label for="reason">Emergency Reason</label>
-            <textarea
-                id="reason"
-                name="reason"
-                placeholder="Describe the emergency condition"
-                required
-            ></textarea>
-        </div>
+            <div class="form-group">
+                <label for="patient">Patient ID</label>
+                <input
+                    type="number"
+                    id="patient"
+                    name="patient"
+                    placeholder="Enter patient ID"
+                    required
+                >
+            </div>
 
-        <button type="submit">
-            Start Emergency Access
-        </button>
-    </form>
+            <div class="form-group">
+                <label for="reason">Reason for Emergency Access</label>
+                <textarea
+                    id="reason"
+                    name="reason"
+                    placeholder="Clearly describe the medical emergency"
+                    required
+                ></textarea>
+            </div>
+
+            <button type="submit" class="btn-danger">
+                Activate Emergency Access
+            </button>
+        </form>
+    </div>
+
+    <!-- ===== COMPLIANCE NOTE ===== -->
+    <div class="compliance-note">
+        <p>
+            Emergency access is time-limited and will automatically expire.
+            Every record accessed during this session will be logged individually.
+        </p>
+    </div>
 
 </section>
 {% endblock %}

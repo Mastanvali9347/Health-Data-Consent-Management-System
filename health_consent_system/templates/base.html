@@ -4,104 +4,155 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Health Consent System{% endblock %}</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Main Styles -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet"
+    >
+
+    <!-- Extra Head -->
     {% block extra_head %}{% endblock %}
 </head>
+
 <body>
 
-    <input type="hidden" id="csrf-token" value="{{ csrf_token }}">
+  <input type="hidden" id="csrf-token" value="{{ csrf_token }}">
 
-    <div id="preloader">
-        <div class="loader-text">Health Consent System</div>
-    </div>
+  <!-- ===== PRELOADER ===== -->
+  <div id="preloader">
+      <div class="loader-text">Health Consent System</div>
+  </div>
 
-    <div class="app-wrapper">
+  <!-- ===== APP WRAPPER ===== -->
+  <div class="app-wrapper">
 
-        <aside class="sidebar">
-            <div class="sidebar-brand">
-                <span class="material-icons">health_and_safety</span>
-                <h2>HealthCare+</h2>
-            </div>
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar">
 
-            <ul class="sidebar-menu">
-                <li>
-                    <a href="/records/dashboard/">
-                        <span class="material-icons">dashboard</span>
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a href="/records/my/">
-                        <span class="material-icons">folder_shared</span>
-                        Medical Records
-                    </a>
-                </li>
-                <li>
-                    <a href="/consent/grant/">
-                        <span class="material-icons">verified_user</span>
-                        Consents
-                    </a>
-                </li>
-                <li>
-                    <a href="/emergency/">
-                        <span class="material-icons">warning</span>
-                        Emergency
-                    </a>
-                </li>
-                <li>
-                    <a href="/notifications/">
-                        <span class="material-icons">notifications</span>
-                        Notifications
-                    </a>
-                </li>
-                <li>
-                    <a href="/settings/">
-                        <span class="material-icons">settings</span>
-                        Settings
-                    </a>
-                </li>
-            </ul>
-        </aside>
+          <div class="sidebar-brand">
+              <span class="material-icons">health_and_safety</span>
+              <h2>HealthCare+</h2>
+          </div>
 
-        <div class="main-content">
+          <ul class="sidebar-menu">
 
-            <header class="topbar">
-                <div class="topbar-left">
-                    <span class="material-icons menu-toggle">menu</span>
-                </div>
+              <li>
+                  <a href="/records/dashboard/">
+                      <span class="material-icons">dashboard</span>
+                      Dashboard
+                  </a>
+              </li>
 
-                <div class="topbar-center">
-                    <h3>{% block page_title %}Dashboard{% endblock %}</h3>
-                </div>
+              <li>
+                  <a href="/records/my-records/">
+                      <span class="material-icons">folder_shared</span>
+                      Medical Records
+                  </a>
+              </li>
 
-                <div class="topbar-right">
-                    <div class="user-info">
-                        <span class="material-icons">account_circle</span>
-                        <span>{{ request.user.username }}</span>
-                    </div>
-                    <a href="/auth/logout/" class="logout-btn">
-                        <span class="material-icons">logout</span>
-                    </a>
-                </div>
-            </header>
+              <li>
+                  <a href="/consent/grant/">
+                      <span class="material-icons">verified_user</span>
+                      Consents
+                  </a>
+              </li>
 
-            <main class="page-content">
-                {% block content %}{% endblock %}
-            </main>
+              <li>
+                  <a href="/emergency/">
+                      <span class="material-icons">warning</span>
+                      Emergency Access
+                  </a>
+              </li>
 
-            <footer class="footer">
-                <p>© 2026 Health Data Consent Management System</p>
-            </footer>
+              <li>
+                  <a href="/notifications/">
+                      <span class="material-icons">notifications</span>
+                      Notifications
+                  </a>
+              </li>
 
-        </div>
-    </div>
+              <li>
+                  <a href="/settings/">
+                      <span class="material-icons">settings</span>
+                      Settings
+                  </a>
+              </li>
 
-    <div class="fab">
-        <span class="material-icons">add</span>
-    </div>
+          </ul>
 
-    <script src="{% static 'js/main.js' %}"></script>
+          <!-- ===== SIDEBAR FOOTER ===== -->
+          <div class="sidebar-footer">
+              <p>Secure • Encrypted • Audited</p>
+          </div>
+
+      </aside>
+
+      <!-- ===== MAIN CONTENT ===== -->
+      <div class="main-content">
+
+          <!-- ===== TOPBAR ===== -->
+          <header class="topbar">
+
+              <div class="topbar-left">
+                  <span class="material-icons menu-toggle">menu</span>
+              </div>
+
+              <div class="topbar-center">
+                  <h3>{% block page_title %}Dashboard{% endblock %}</h3>
+              </div>
+
+              <div class="topbar-right">
+                  <div class="user-info">
+                      <span class="material-icons">account_circle</span>
+                      <span>
+                          {{ request.user.username }}
+                          {% if request.user.is_authenticated %}
+                              ({{ request.user.role }})
+                          {% endif %}
+                      </span>
+                  </div>
+
+                  <a href="/auth/logout/" class="logout-btn" title="Logout">
+                      <span class="material-icons">logout</span>
+                  </a>
+              </div>
+
+          </header>
+
+          <!-- ===== PAGE CONTENT ===== -->
+          <main class="page-content">
+              {% block content %}{% endblock %}
+          </main>
+
+          <!-- ===== FOOTER ===== -->
+          <footer class="footer">
+              <p>
+                  © 2026 Health Data Consent Management System ·
+                  Secure Healthcare Data Platform
+              </p>
+          </footer>
+
+      </div>
+  </div>
+
+  <!-- ===== OVERLAY (MOBILE SIDEBAR) ===== -->
+  <div class="sidebar-overlay"></div>
+
+  <!-- ===== FLOATING ACTION BUTTON ===== -->
+  <div class="fab" title="Quick Action">
+      <span class="material-icons">add</span>
+  </div>
+
+  <!-- ===== MAIN SCRIPT ===== -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+  {% block extra_js %}{% endblock %}
+
 </body>
 </html>

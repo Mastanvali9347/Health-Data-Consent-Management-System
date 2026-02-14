@@ -21,19 +21,18 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', lambda request: redirect('/auth/login/')),
-    path('admin/', admin.site.urls),
+    path("", lambda request: redirect("/auth/login/")),
+    path("admin/", admin.site.urls),
 
-    path('auth/', include('accounts.urls')),
-    path('records/', include('medical_records.urls')),
-    path('consent/', include('consent_management.urls')),
-    path('emergency/', include('emergency_access.urls')),
-    path('notifications/', include('notifications.urls')),
-    path('settings/', include('admin_panel.urls')),
-    path('logs/', include('access_logs.urls')),
+    path("auth/", include("accounts.urls")),
+    path("records/", include("medical_records.urls")),
+    path("consent/", include("consent_management.urls")),
+    path("emergency/", include("emergency_access.urls")),
+    path("notifications/", include("notifications.urls")),
+    path("settings/", include("admin_panel.urls")),
+    path("logs/", include("access_logs.urls")),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 

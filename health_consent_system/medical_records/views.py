@@ -16,42 +16,34 @@ from emergency_access.services import has_emergency_access
 from access_logs.models import AccessLog
 
 
-@login_required(login_url='/auth/login/')
+@login_required(login_url="/auth/login/")
 def patient_dashboard(request):
-    return render(request, 'patient/dashboard.html')
+    return render(request, "patient/dashboard.html")
 
 
-@login_required(login_url='/auth/login/')
+@login_required(login_url="/auth/login/")
 def upload_record_page(request):
-    return render(request, 'patient/upload_record.html')
+    return render(request, "patient/upload_record.html")
 
 
-@login_required(login_url='/auth/login/')
+@login_required(login_url="/auth/login/")
 def my_records_page(request):
     records = MedicalRecord.objects.filter(patient=request.user)
-    return render(request, 'patient/my_records.html', {
-        'records': records
-    })
+    return render(request, "patient/my_records.html", {"records": records})
 
 
 class UploadMedicalRecordView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        if request.user.role != 'PATIENT':
-            return Response(
-                {"error": "Only patients can upload records"},
-                status=403
-            )
+        if request.user.role != "PATIENT":
+            return Response({"error": "Only patients can upload records"}, status=403)
 
-        uploaded_file = request.FILES.get('file')
-        record_type = request.data.get('record_type')
+        uploaded_file = request.FILES.get("file")
+        record_type = request.data.get("record_type")
 
         if not uploaded_file or not record_type:
-            return Response(
-                {"error": "File and record_type are required"},
-                status=400
-            )
+            return Response({"error": "File and record_type are required"}, status=400)
 
         encrypted_data = encrypt_file(uploaded_file.read())
 
@@ -69,13 +61,10 @@ class UploadMedicalRecordView(APIView):
         AccessLog.objects.create(
             user=request.user,
             record=record,
-            action='UPLOAD_RECORD'
+            action="UPLOAD_RECORD"
         )
 
-        return Response(
-            {"message": "Medical record uploaded successfully"},
-            status=201
-        )
+        return Response({"message": "Medical record uploaded successfully"}, status=201)
 
 
 class PatientRecordsAPI(APIView):
@@ -91,39 +80,34 @@ class DoctorAccessRecordView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, record_id):
-        if request.user.role != 'DOCTOR':
-            return Response(
-                {"error": "Only doctors allowed"},
-                status=403
-            )
+        if request.user.role != "DOCTOR":
+            return Response({"error": "Only doctors allowed"}, status=403)
 
         record = get_object_or_404(MedicalRecord, id=record_id)
 
         consent_ok = has_valid_consent(
-            record.patient,
-            request.user,
-            record.record_type
+            patient=record.patient,
+            provider=request.user,
+            record_type=record.record_type
         )
 
         emergency_ok = has_emergency_access(
-            request.user,
-            record.patient
+            doctor=request.user,
+            patient=record.patient
         )
 
         if not consent_ok and not emergency_ok:
-            return Response(
-                {"error": "Consent not available"},
-                status=403
-            )
+            return Response({"error": "Consent not available"}, status=403)
 
         AccessLog.objects.create(
             user=request.user,
             record=record,
-            action='DOCTOR_VIEW_RECORD'
+            action="DOCTOR_VIEW_RECORD"
         )
 
         return Response({
-            "message": "Consent verified. Access allowed",
+            "message": "Access granted",
+            "record_id": record.id,
             "record_type": record.record_type,
             "patient": record.patient.username
         })

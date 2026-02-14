@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 
 {% block title %}Login{% endblock %}
+
 {% block page_title %}Login{% endblock %}
 
 {% block content %}
 <section class="auth-wrapper">
     <div class="auth-card">
         <h2>Login</h2>
+
+        {% if error %}
+            <p style="color:red; margin-bottom:16px;">{{ error }}</p>
+        {% endif %}
 
         <form method="post" action="/auth/login/">
             {% csrf_token %}
@@ -21,10 +26,10 @@
                 <input type="password" name="password" required>
             </div>
 
-            <button type="submit">Login</button>
+            <button type="submit" class="btn btn-primary">Login</button>
         </form>
 
-        <p>
+        <p style="margin-top:16px;">
             No account?
             <a href="/auth/register/">Register</a>
         </p>

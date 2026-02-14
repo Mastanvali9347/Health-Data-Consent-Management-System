@@ -9,7 +9,10 @@
     <!-- ===== HERO SECTION ===== -->
     <div class="dashboard-hero">
         <h2>Welcome, Dr. {{ request.user.username }}</h2>
-        <p>Access patient records securely with consent or emergency authorization</p>
+        <p>
+            Securely access patient medical records using consent-based
+            or emergency-authorized access
+        </p>
     </div>
 
     <!-- ===== STATS SECTION ===== -->
@@ -19,7 +22,7 @@
             <span class="material-icons">people</span>
             <div>
                 <h3>Patients</h3>
-                <p>Patients under your care</p>
+                <p>Patients assigned under your care</p>
             </div>
         </div>
 
@@ -27,7 +30,7 @@
             <span class="material-icons">verified_user</span>
             <div>
                 <h3>Active Consents</h3>
-                <p>Patients who granted access</p>
+                <p>Patients who granted valid access</p>
             </div>
         </div>
 
@@ -35,7 +38,15 @@
             <span class="material-icons">warning</span>
             <div>
                 <h3>Emergency Access</h3>
-                <p>Break-glass sessions</p>
+                <p>Break-glass sessions recorded</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="material-icons">history</span>
+            <div>
+                <h3>Audit Logs</h3>
+                <p>Your recent system activities</p>
             </div>
         </div>
 
@@ -44,26 +55,32 @@
     <!-- ===== QUICK ACTIONS ===== -->
     <div class="quick-actions">
 
-        <h3>Quick Actions</h3>
+        <h3>Clinical Actions</h3>
 
         <div class="action-grid">
 
             <a href="#" class="action-card">
                 <span class="material-icons">folder_shared</span>
-                <h4>View Patient Records</h4>
-                <p>Access records with valid consent</p>
+                <h4>Patient Records</h4>
+                <p>View records with patient consent</p>
             </a>
 
             <a href="#" class="action-card">
                 <span class="material-icons">warning_amber</span>
                 <h4>Emergency Access</h4>
-                <p>Request break-glass permission</p>
+                <p>Request critical break-glass access</p>
             </a>
 
             <a href="#" class="action-card">
                 <span class="material-icons">history</span>
                 <h4>Access History</h4>
-                <p>View your audit logs</p>
+                <p>Review your audit trail</p>
+            </a>
+
+            <a href="#" class="action-card">
+                <span class="material-icons">notifications</span>
+                <h4>Notifications</h4>
+                <p>Security & consent alerts</p>
             </a>
 
         </div>
@@ -75,31 +92,49 @@
         <h3>Recent Activity</h3>
 
         <ul class="activity-list">
+
             <li>
                 <span class="material-icons">visibility</span>
                 <div>
-                    <strong>Viewed patient record</strong>
-                    <p>Blood Report accessed</p>
+                    <strong>Patient record accessed</strong>
+                    <p>Blood Report viewed for Patient_101</p>
                 </div>
             </li>
 
             <li>
                 <span class="material-icons">verified</span>
                 <div>
-                    <strong>Consent verified</strong>
-                    <p>Patient access approved</p>
+                    <strong>Consent validated</strong>
+                    <p>Access approved by patient</p>
                 </div>
             </li>
 
             <li>
                 <span class="material-icons">warning</span>
                 <div>
-                    <strong>Emergency access requested</strong>
-                    <p>Critical situation logged</p>
+                    <strong>Emergency access logged</strong>
+                    <p>Critical case documented</p>
                 </div>
             </li>
+
+            <li>
+                <span class="material-icons">security</span>
+                <div>
+                    <strong>Security check completed</strong>
+                    <p>No policy violations detected</p>
+                </div>
+            </li>
+
         </ul>
 
+    </div>
+
+    <!-- ===== COMPLIANCE NOTICE ===== -->
+    <div class="compliance-note">
+        <p>
+            All access to patient data is monitored and recorded.
+            Misuse of emergency access may result in administrative action.
+        </p>
     </div>
 
 </section>

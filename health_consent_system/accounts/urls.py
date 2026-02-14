@@ -10,12 +10,16 @@ from .views import (
     ProfileView
 )
 
-urlpatterns = [
-    path('login/', login_page),
-    path('register/', register_page),
-    path('logout/', lambda request: (logout(request), redirect('/auth/login/'))[1]),
+def logout_view(request):
+    logout(request)
+    return redirect("/auth/login/")
 
-    path('api/login/', LoginAPIView.as_view()),
-    path('api/register/', RegisterAPIView.as_view()),
-    path('profile/', ProfileView.as_view()),
+urlpatterns = [
+    path("login/", login_page, name="login_page"),
+    path("register/", register_page, name="register_page"),
+    path("logout/", logout_view, name="logout"),
+
+    path("api/login/", LoginAPIView.as_view(), name="api_login"),
+    path("api/register/", RegisterAPIView.as_view(), name="api_register"),
+    path("profile/", ProfileView.as_view(), name="profile"),
 ]

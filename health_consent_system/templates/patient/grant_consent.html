@@ -1,30 +1,42 @@
 {% extends "base.html" %}
-{% block title %}Grant Consent{% endblock %}
+
+{% block title %}Grant Consent | HealthCare+{% endblock %}
+{% block page_title %}Grant Consent{% endblock %}
 
 {% block content %}
 <section class="consent-wrapper">
-    <div class="consent-card">
+
+    <!-- ===== HEADER ===== -->
+    <div class="consent-header">
         <h2>Grant Medical Data Consent</h2>
+        <p>
+            You are in full control of who can access your medical information.
+            Consent is required before any doctor can view your records.
+        </p>
+    </div>
+
+    <!-- ===== CONSENT CARD ===== -->
+    <div class="consent-card">
 
         <form method="post" action="/consent/api/grant/">
             {% csrf_token %}
 
             <div class="form-group">
-                <label>Doctor ID</label>
+                <label>Doctor User ID</label>
                 <input
                     type="number"
                     name="provider"
-                    placeholder="Enter Doctor User ID"
+                    placeholder="Enter doctor user ID"
                     required
                 >
             </div>
 
             <div class="form-group">
-                <label>Record Type</label>
+                <label>Medical Record Type</label>
                 <select name="record_type" required>
-                    <option value="">Select Record Type</option>
+                    <option value="">Select record type</option>
                     <option value="Blood Report">Blood Report</option>
-                    <option value="MRI">MRI</option>
+                    <option value="MRI">MRI Scan</option>
                     <option value="X-Ray">X-Ray</option>
                     <option value="Prescription">Prescription</option>
                 </select>
@@ -39,15 +51,21 @@
                 >
             </div>
 
-            <button type="submit">
+            <button type="submit" class="btn-primary">
                 Grant Consent
             </button>
         </form>
 
-        <p class="consent-note">
-            You can revoke this consent at any time.
-            All access is logged for security.
+    </div>
+
+    <!-- ===== CONSENT INFORMATION ===== -->
+    <div class="consent-info">
+        <p>
+            • You may revoke consent at any time from your dashboard.<br>
+            • All doctor access is logged and audited.<br>
+            • Emergency access may override consent in critical cases.
         </p>
     </div>
+
 </section>
 {% endblock %}

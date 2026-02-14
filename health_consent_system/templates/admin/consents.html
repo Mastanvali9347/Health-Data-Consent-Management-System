@@ -1,38 +1,109 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 
-{% block title %}Consent Records | HealthCare+{% endblock %}
-{% block page_title %}Consent Records{% endblock %}
+{% block title %}Consent Records | HealthCare+{%endblock %} 
+{% block page_title %}Consent Records{% endblock %} 
 
 {% block content %}
-<section class="admin-consents-wrapper">
 
-    <div class="page-header">
-        <h2>Consent Management</h2>
-        <p>Track all patient consents</p>
+<section class="admin-consents-wrapper">
+  <!-- ===== PAGE HEADER ===== -->
+  <div class="page-header">
+    <h2>Consent Management</h2>
+    <p>
+      Monitor, audit, and manage all patient data access consents across the
+      healthcare system.
+    </p>
+  </div>
+
+  <!-- ===== SUMMARY CARDS ===== -->
+  <div class="summary-grid">
+    <div class="summary-card">
+      <h3>Total Consents</h3>
+      <p>All consent records issued</p>
     </div>
 
-    <table class="admin-table">
-        <thead>
-            <tr>
-                <th>Consent ID</th>
-                <th>Patient</th>
-                <th>Doctor</th>
-                <th>Record Type</th>
-                <th>Valid Until</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>patient_101</td>
-                <td>doctor_201</td>
-                <td>Blood Report</td>
-                <td>20 Feb 2026</td>
-                <td>Active</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="summary-card">
+      <h3>Active Consents</h3>
+      <p>Currently valid permissions</p>
+    </div>
 
+    <div class="summary-card">
+      <h3>Expired Consents</h3>
+      <p>Automatically revoked access</p>
+    </div>
+  </div>
+
+  <!-- ===== CONSENT TABLE ===== -->
+  <div class="table-wrapper">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Consent ID</th>
+          <th>Patient</th>
+          <th>Doctor</th>
+          <th>Record Type</th>
+          <th>Start Date</th>
+          <th>Valid Until</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>patient_101</td>
+          <td>doctor_201</td>
+          <td>Blood Report</td>
+          <td>10 Feb 2026</td>
+          <td>20 Feb 2026</td>
+          <td>
+            <span>Active</span>
+          </td>
+          <td>
+            <a href="#">Revoke</a>
+          </td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td>patient_102</td>
+          <td>doctor_305</td>
+          <td>MRI Scan</td>
+          <td>01 Feb 2026</td>
+          <td>05 Feb 2026</td>
+          <td>
+            <span>Expired</span>
+          </td>
+          <td>
+            <a href="#">View</a>
+          </td>
+        </tr>
+
+        <tr>
+          <td>3</td>
+          <td>patient_103</td>
+          <td>doctor_410</td>
+          <td>X-Ray</td>
+          <td>08 Feb 2026</td>
+          <td>15 Feb 2026</td>
+          <td>
+            <span>Active</span>
+          </td>
+          <td>
+            <a href="#">Revoke</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== COMPLIANCE NOTICE ===== -->
+  <div class="compliance-note">
+    <p>
+      All consent changes are logged for audit and legal compliance.
+      Unauthorized modifications may result in disciplinary action.
+    </p>
+  </div>
 </section>
 {% endblock %}

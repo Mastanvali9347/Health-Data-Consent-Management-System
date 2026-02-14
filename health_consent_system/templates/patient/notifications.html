@@ -9,7 +9,18 @@
     <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
         <h2>Notifications</h2>
-        <p>Stay informed about access and security events</p>
+        <p>
+            Stay informed about data access, consent changes,
+            and security-related activities
+        </p>
+    </div>
+
+    <!-- ===== NOTIFICATION SUMMARY ===== -->
+    <div class="notification-summary">
+        <p>
+            Notifications help you track who accessed your medical data
+            and when. All critical events are recorded for your safety.
+        </p>
     </div>
 
     <!-- ===== NOTIFICATIONS LIST ===== -->
@@ -19,7 +30,7 @@
             <span class="material-icons">verified</span>
             <div class="notification-content">
                 <h4>Consent Granted</h4>
-                <p>You granted access to Doctor_201</p>
+                <p>You approved medical data access for <strong>Doctor_201</strong></p>
                 <small>10 Feb 2026 · 09:45 PM</small>
             </div>
         </div>
@@ -28,7 +39,7 @@
             <span class="material-icons">visibility</span>
             <div class="notification-content">
                 <h4>Record Accessed</h4>
-                <p>Your Blood Report was accessed by Doctor_201</p>
+                <p>Your <strong>Blood Report</strong> was viewed by Doctor_201</p>
                 <small>10 Feb 2026 · 09:30 PM</small>
             </div>
         </div>
@@ -36,12 +47,32 @@
         <div class="notification-card">
             <span class="material-icons">warning</span>
             <div class="notification-content">
-                <h4>Emergency Access</h4>
-                <p>Emergency access was used on your records</p>
+                <h4>Emergency Access Used</h4>
+                <p>
+                    Emergency (break-glass) access was activated
+                    on your medical records
+                </p>
                 <small>09 Feb 2026 · 11:10 PM</small>
             </div>
         </div>
 
+        <div class="notification-card">
+            <span class="material-icons">security</span>
+            <div class="notification-content">
+                <h4>Security Check</h4>
+                <p>No unauthorized access detected in recent activity</p>
+                <small>09 Feb 2026 · 10:45 PM</small>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== PRIVACY NOTE ===== -->
+    <div class="privacy-note">
+        <p>
+            If you notice any suspicious activity, revoke consent immediately
+            or contact system administrators. Your data security is our priority.
+        </p>
     </div>
 
 </section>

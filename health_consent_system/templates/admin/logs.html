@@ -6,38 +6,86 @@
 {% block content %}
 <section class="admin-logs-wrapper">
 
+    <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
         <h2>Audit Logs</h2>
-        <p>Complete access and activity history</p>
+        <p>Complete access, consent, and security activity history</p>
     </div>
 
+    <!-- ===== AUDIT SUMMARY ===== -->
+    <div class="audit-summary">
+        <p>
+            All actions performed in the system are recorded for
+            compliance, security monitoring, and investigation purposes.
+        </p>
+    </div>
+
+    <!-- ===== LOGS TABLE ===== -->
     <table class="admin-table">
         <thead>
             <tr>
                 <th>Log ID</th>
                 <th>User</th>
+                <th>Role</th>
                 <th>Action</th>
                 <th>Record ID</th>
+                <th>IP Address</th>
                 <th>Date & Time</th>
             </tr>
         </thead>
         <tbody>
+
             <tr>
                 <td>1</td>
                 <td>doctor_201</td>
+                <td>DOCTOR</td>
                 <td>DOCTOR_VIEW_RECORD</td>
                 <td>1</td>
+                <td>192.168.1.12</td>
                 <td>10 Feb 2026 21:10</td>
             </tr>
+
             <tr>
                 <td>2</td>
                 <td>patient_101</td>
+                <td>PATIENT</td>
                 <td>UPLOAD_RECORD</td>
                 <td>1</td>
+                <td>192.168.1.8</td>
                 <td>10 Feb 2026 20:45</td>
             </tr>
+
+            <tr>
+                <td>3</td>
+                <td>doctor_201</td>
+                <td>DOCTOR</td>
+                <td>EMERGENCY_ACCESS_USED</td>
+                <td>1</td>
+                <td>192.168.1.12</td>
+                <td>09 Feb 2026 23:10</td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td>admin_301</td>
+                <td>ADMIN</td>
+                <td>VIEW_AUDIT_LOGS</td>
+                <td>—</td>
+                <td>192.168.1.5</td>
+                <td>09 Feb 2026 22:55</td>
+            </tr>
+
         </tbody>
     </table>
+
+    <!-- ===== COMPLIANCE NOTE ===== -->
+    <div class="compliance-note">
+        <p>
+            These logs are immutable and cannot be modified by users.
+            Any suspicious or unauthorized activity must be reviewed
+            immediately by the system administrator.
+        </p>
+    </div>
 
 </section>
 {% endblock %}

@@ -9,11 +9,10 @@ from .views import (
 )
 
 urlpatterns = [
-    path('dashboard/', patient_dashboard),
-    path('upload/', upload_record_page),
-    path('my/', my_records_page),
-
-    path('api/upload/', UploadMedicalRecordView.as_view()),
-    path('api/my/', PatientRecordsAPI.as_view()),
-    path('doctor-access/<int:record_id>/', DoctorAccessRecordView.as_view()),
+    path("dashboard/", patient_dashboard, name="patient_dashboard"),
+    path("upload/", upload_record_page, name="upload_record_page"),
+    path("my-records/", my_records_page, name="my_records_page"),
+    path("api/upload/", UploadMedicalRecordView.as_view(), name="upload_record_api"),
+    path("api/my-records/", PatientRecordsAPI.as_view(), name="patient_records_api"),
+    path("doctor-access/<int:record_id>/", DoctorAccessRecordView.as_view(), name="doctor_access_record"),
 ]

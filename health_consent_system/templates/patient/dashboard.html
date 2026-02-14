@@ -8,11 +8,16 @@
 
 <section class="dashboard-wrapper">
 
+    <!-- ===== HERO SECTION ===== -->
     <div class="dashboard-hero">
         <h2>Welcome, {{ request.user.username }}</h2>
-        <p>Manage your medical records and control data access securely</p>
+        <p>
+            Securely manage your medical records and control
+            who can access your health data
+        </p>
     </div>
 
+    <!-- ===== STATISTICS ===== -->
     <div class="stats-grid">
 
         <div class="stat-card">
@@ -21,7 +26,7 @@
             </div>
             <div class="stat-info">
                 <h3>My Records</h3>
-                <p>Total medical files uploaded</p>
+                <p>Encrypted medical documents</p>
             </div>
         </div>
 
@@ -31,7 +36,7 @@
             </div>
             <div class="stat-info">
                 <h3>Active Consents</h3>
-                <p>Doctors with access permission</p>
+                <p>Doctors with valid access</p>
             </div>
         </div>
 
@@ -40,13 +45,24 @@
                 <span class="material-icons">notifications</span>
             </div>
             <div class="stat-info">
-                <h3>Alerts</h3>
-                <p>Security & access notifications</p>
+                <h3>Security Alerts</h3>
+                <p>Access & system notifications</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-icons">history</span>
+            </div>
+            <div class="stat-info">
+                <h3>Audit Logs</h3>
+                <p>Complete access history</p>
             </div>
         </div>
 
     </div>
 
+    <!-- ===== QUICK ACTIONS ===== -->
     <div class="quick-actions">
         <h3>Quick Actions</h3>
 
@@ -55,39 +71,47 @@
             <a href="/records/upload/" class="action-card">
                 <span class="material-icons">upload_file</span>
                 <h4>Upload Record</h4>
-                <p>Add a new medical document</p>
+                <p>Add new medical documents</p>
             </a>
 
             <a href="/records/my-records/" class="action-card">
                 <span class="material-icons">folder_open</span>
-                <h4>View Records</h4>
-                <p>Access your uploaded files</p>
+                <h4>My Records</h4>
+                <p>View and download files</p>
             </a>
 
             <a href="/consent/grant/" class="action-card">
                 <span class="material-icons">lock_open</span>
                 <h4>Grant Consent</h4>
-                <p>Allow doctor access securely</p>
+                <p>Control doctor access</p>
+            </a>
+
+            <a href="/notifications/" class="action-card">
+                <span class="material-icons">notifications_active</span>
+                <h4>Notifications</h4>
+                <p>Security & access alerts</p>
             </a>
 
             <a href="/logs/" class="action-card">
                 <span class="material-icons">history</span>
                 <h4>Access Logs</h4>
-                <p>View who accessed your data</p>
+                <p>View audit trail</p>
             </a>
 
         </div>
     </div>
 
+    <!-- ===== RECENT ACTIVITY ===== -->
     <div class="recent-activity">
         <h3>Recent Activity</h3>
 
         <ul class="activity-list">
+
             <li>
                 <span class="material-icons">upload</span>
                 <div>
                     <strong>Medical record uploaded</strong>
-                    <p>Blood Report</p>
+                    <p>Blood Report added securely</p>
                 </div>
             </li>
 
@@ -100,18 +124,38 @@
             </li>
 
             <li>
-                <span class="material-icons">security</span>
+                <span class="material-icons">visibility</span>
                 <div>
-                    <strong>Security check</strong>
-                    <p>No unusual activity detected</p>
+                    <strong>Record accessed</strong>
+                    <p>Your data was viewed by a doctor</p>
                 </div>
             </li>
+
+            <li>
+                <span class="material-icons">security</span>
+                <div>
+                    <strong>Security check completed</strong>
+                    <p>No suspicious activity detected</p>
+                </div>
+            </li>
+
         </ul>
+    </div>
+
+    <!-- ===== PRIVACY NOTICE ===== -->
+    <div class="privacy-note">
+        <p>
+            Your health data is encrypted and protected.
+            You can revoke doctor access at any time from the consent section.
+        </p>
     </div>
 
 </section>
 
 {% else %}
-<p style="padding:40px">Not authenticated. <a href="/auth/login/">Login</a></p>
+<p style="padding:40px">
+    You are not authenticated.
+    <a href="/auth/login/">Login</a>
+</p>
 {% endif %}
 {% endblock %}
