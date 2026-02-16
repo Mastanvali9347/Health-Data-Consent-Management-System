@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-$*!^%oa5q+dq$&brn0%lrg!6=_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["*", ".onrender.com"]
+ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -166,7 +166,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
